@@ -28,3 +28,20 @@ bundle exec rails db:setup
 ```
 bundle exec rake spec
 ```
+
+### Code Analysis
+[Brakeman](https://github.com/presidentbeef/brakeman) and [Rubocop](https://github.com/bbatsov/rubocop) are configured to run automatically whenever tests are run. To run them independently:
+
+```
+# security analysis: this will provide additional detail
+bundle exec brakeman
+
+# style analysis
+bundle exec rubocop
+```
+
+To start the local server:
+```
+bundle exec rails s
+```
+From your browser, head to localhost:3000
