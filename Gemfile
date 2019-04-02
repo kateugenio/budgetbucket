@@ -32,6 +32,15 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'nokogiri'
 
+# jQuery
+gem 'jquery-rails'
+
+# materialize css
+gem 'materialize-sass', '~> 1.0.0'
+
+# Ruby Static Code Analyser
+gem 'rubocop'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -41,6 +50,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rspec-rails'
+  gem 'factory_bot'
+  # Brakeman: security analysis: https://github.com/presidentbeef/brakeman
+  gem 'brakeman'
 end
 
 group :development do
@@ -50,6 +63,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
