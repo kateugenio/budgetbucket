@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+Budgeting Application that uses Plaid to connect to your bank accounts and get real-time balances to enable better budgeting and monitoring.
 
-* Ruby version
+## Setup
 
-* System dependencies
+### Environment Requirements
+* Ruby 2.3.1
+* Rails 5.1.7
+* PostgreSQL 10.3
+```
+git clone https://github.com/kateugenio/bucket_list.git
+cd budgetbucket
+bundle install
+```
 
-* Configuration
+## Database setup
 
-* Database creation
+```
+bundle exec rails db:setup
+```
 
-* Database initialization
+## Development
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Run Tests with Rubocop and Brakeman
+```
+bundle exec rake spec
+```
