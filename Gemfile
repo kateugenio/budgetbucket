@@ -41,6 +41,9 @@ gem 'materialize-sass', '~> 1.0.0'
 # Ruby Static Code Analyser
 gem 'rubocop'
 
+# Devise Authentication
+gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
