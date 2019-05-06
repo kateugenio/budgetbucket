@@ -1,0 +1,16 @@
+body.budget-bucket-theme {
+  .container-fluid {
+  }
+
+  .devise-page-bg {
+    background-image: image-url('piggy-bank.jpg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .devise-form {
+    margin-top: 25%;
+  }
+}
