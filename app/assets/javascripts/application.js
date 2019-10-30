@@ -15,3 +15,24 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+
+// Global application events
+var applicationHandler = (function() {
+
+  var initialize = function() {
+    initMaterializeSidenav();
+  };
+
+  var initMaterializeSidenav = function() {
+    $('.sidenav').sidenav();
+  };
+
+  return {
+    init: initialize,
+  };
+})();
+
+$(document).on('turbolinks:load', function() {
+  applicationHandler.init();
+});

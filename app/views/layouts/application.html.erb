@@ -14,9 +14,18 @@
         data-controller="<%= controller.controller_path %>"
         data-action="<%= controller.action_name %>">
     <div class="container-fluid">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
+      <% if ['sessions', 'registrations', 'passwords'].exclude?(controller.controller_name) %>
+        <div class="row">
+          <div class="col s3 teal lighten-4" style="height: 100vh;">
+            <%= render partial: 'layouts/sidenav' %>
+          </div>
+          <div class="col s9 teal lighten-4" style="height: 100vh;">
+            <%= yield %>
+          </div>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </div>
   </body>
 </html>
