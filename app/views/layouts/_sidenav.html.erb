@@ -1,0 +1,22 @@
+<div id="menu-hamburger">
+  <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+</div>
+
+<ul id="slide-out" class="sidenav sidenav-fixed">
+  <li><div class="user-view">
+    <div class="background">
+      <%= image_tag('sidenav-piggy.jpg') %>
+    </div>
+    <h3 class="grey-text darken-1">Budget Bucket</h3>
+    <a href="#user"></a>
+    <a href="#email"><span class="teal-text lighten-2 email"><%= @user.email %></span></a>
+  </div></li>
+  <li><%= link_to 'Home', dashboard_path %></li>
+  <li><a href="#!">Connected Accounts</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="waves-effect" href="#!">Settings</a></li>
+  <li><a class="waves-effect" href="#!">Help</a></li>
+  <li><%= link_to 'Logout', destroy_user_session_path, class: "waves-effect waves-light btn", method: "delete" %></li>
+
+</ul>
+

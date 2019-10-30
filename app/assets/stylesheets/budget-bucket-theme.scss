@@ -1,5 +1,6 @@
 body.budget-bucket-theme {
-  .container-fluid {
+  #menu-hamburger {
+    display: none;
   }
 
   .devise-page-bg {
@@ -12,5 +13,12 @@ body.budget-bucket-theme {
 
   .devise-form {
     margin-top: 25%;
+  }
+  @media only screen and (max-width : 992px) {
+    padding-left: 0;
+
+    #menu-hamburger {
+      display: block;
+    }
   }
 }
