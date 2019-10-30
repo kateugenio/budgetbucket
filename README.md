@@ -7,8 +7,8 @@ Budgeting Application that uses Plaid to connect to your bank accounts and get r
 ## Setup
 
 ### Environment Requirements
-* Ruby 2.3.1
-* Rails 5.1.7
+* Ruby 2.4.0
+* Rails 5.2.3
 * PostgreSQL 10.3
 ```
 git clone https://github.com/kateugenio/bucket_list.git
