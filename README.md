@@ -16,6 +16,16 @@ cd budgetbucket
 bundle install
 ```
 
+## Credentials
+Secrets are encrypted in credentials.yml.enc.
+
+Master key is kept by repo owner. Place the key under config/ in a new file called master.key. You will need this key to run the server locally, setup the database, and to run tests.
+
+To edit secrets:
+```
+EDITOR=vim rails credentials:edit
+```
+
 ## Database setup
 
 ```
