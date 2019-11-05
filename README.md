@@ -2,6 +2,8 @@
 
 ## Overview
 
+![Piggy Bank](https://images.pexels.com/photos/9660/business-money-pink-coins.jpg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=660)
+
 Budgeting Application that uses Plaid to connect to your bank accounts and get real-time balances to enable better budgeting and monitoring.
 
 ## Setup
