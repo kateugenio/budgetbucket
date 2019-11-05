@@ -44,6 +44,9 @@ gem 'rubocop'
 # Devise Authentication
 gem 'devise'
 
+# External Bank Account Connection
+gem 'plaid'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
