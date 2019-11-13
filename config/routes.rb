@@ -6,5 +6,7 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'dashboard#dashboard'
 
+  post 'metadata', to: 'external_accounts#metadata'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
