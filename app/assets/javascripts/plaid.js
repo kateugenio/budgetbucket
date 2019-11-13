@@ -28,8 +28,7 @@ var PlaidService = (function() {
       // Optional, specify a language to localize Link
       language: 'en',
       onLoad: function() {
-        // Optional, called when Link loads
-        console.log("In onLoad")
+        // Optional, called when Link loadså
       },
       onSuccess: function(public_token, metadata) {
         // Send the public_token to your app server.
@@ -39,10 +38,12 @@ var PlaidService = (function() {
         // $.post('/get_access_token', {
         //   public_token: public_token,
         // });
-        console.log("In onSuccess and public_token is " + public_token + "and metadata is " + JSON.stringify(metadata));
+        $.post('/metadata', {
+          public_token: public_token,
+          metadata: metadata
+        });
       },
       onExit: function(err, metadata) {
-        console.log("In onExit");
         // The user exited the Link flow.
         if (err != null) {
           // The user encountered a Plaid API error prior to exiting.
@@ -52,7 +53,6 @@ var PlaidService = (function() {
         // Storing this information can be helpful for support.
       },
       onEvent: function(eventName, metadata) {
-        console.log("In onEvent");
         // Optionally capture Link flow events, streamed through
         // this callback as your users connect an Item to Plaid.
         // For example:
