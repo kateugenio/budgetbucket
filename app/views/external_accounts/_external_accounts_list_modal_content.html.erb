@@ -1,26 +1,26 @@
-<div class="modal-content">
-  <h4><%= @metadata[:institution][:name] %></h4>
-  <p>Select an account</p>
+<%= form_with model: @account, url: create_from_service_path, local: true do |f| %>
+  <div class="modal-content">
+    <h4><%= @institution_name %></h4>
+    <p>Select an account</p>
 
-  <div id="accounts-list">
-    <ul class="collection with-header">
-      <% @metadata[:accounts].each_pair do |key, account| %>
-        <li class="collection-item">
-          <div class="row valign-wrapper">
-            <div class="col s6">
-              <%= account[:name] %><br>
-              XXX<%= account[:mask] %><br>
-              <%= account[:subtype].titleize %>
-            </div>
-            <div class="col s6">
-              <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
-            </div>
-          </div>
-        </li>
+    <div id="accounts-list">
+      <%= f.collection_radio_buttons :account_id, @accounts, proc { |account| account[:id] }, :to_s do |b| %>
+        <p class="radio-buttons-with-padding hoverable">
+          <label for=<%= b.value %>>
+            <%= b.radio_button class: 'with-gap', id: b.value, name: "external-accounts" %>
+            <span>
+              <%= b.object[:name] %><br>
+              <%= b.object[:mask] %><br>
+              <%= b.object[:subtype].titleize %><br>
+            </span>
+          </label>
+        </p>
       <% end %>
-    </ul>
+    </div>
   </div>
-</div>
-<div class="modal-footer">
-  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-</div>
+  <div class="modal-footer">
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+      <i class="material-icons right">send</i>
+    </button>
+  </div>
+<% end %>
