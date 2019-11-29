@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_051514) do
+ActiveRecord::Schema.define(version: 2019_11_29_185332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_051514) do
     t.string "item_id"
     t.string "account_id"
     t.string "account_name"
-    t.string "type"
+    t.string "account_type"
     t.string "mask"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
