@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   # DashboardController
   get 'dashboard', to: 'dashboard#dashboard'
 
-  # ExternalAccountsController
-  post 'metadata', to: 'external_accounts#metadata'
-  post 'create_from_service', to: 'external_accounts#create_from_service'
+  # AccountsController
+  resources :accounts, only: :show
+  post 'metadata', to: 'accounts#metadata'
+  post 'create_from_service', to: 'accounts#create_from_service'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
