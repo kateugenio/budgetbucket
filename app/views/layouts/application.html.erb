@@ -16,7 +16,7 @@
         data-action="<%= controller.action_name %>">
     <div class="container-fluid">
       <% if ['sessions', 'registrations', 'passwords'].exclude?(controller.controller_name) %>
-        <div class="row grey darken-4">
+        <div class="row">
           <div class="col s3" style="height: 100vh;">
             <%= render partial: 'layouts/sidenav' %>
           </div>
