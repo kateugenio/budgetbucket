@@ -7,7 +7,7 @@
       <%= f.collection_radio_buttons :account_id, @accounts, proc { |account| account[:id] }, :to_s do |b| %>
         <p class="radio-buttons-with-padding hoverable">
           <label for=<%= b.value %>>
-            <%= b.radio_button class: 'with-gap', id: b.value, name: "external-accounts" %>
+            <%= b.radio_button class: 'with-gap', id: b.value, name: "account[account_id]" %>
             <span>
               <%= b.object[:name] %><br>
               <%= b.object[:mask] %><br>

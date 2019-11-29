@@ -1,4 +1,4 @@
-class ExternalAccountsController < ApplicationController
+class AccountsController < ApplicationController
   before_action :set_user
 
   # POST /metadata
@@ -25,10 +25,28 @@ class ExternalAccountsController < ApplicationController
   end
 
   def create_from_service
-    puts params.inspect
+    @account = @user.accounts.new(account_params)
+    @account.update_with_cached_metadata
+    if @account.save
+      Rails.cache.delete("/users/#{@user.id}/external_accounts")
+      redirect_to dashboard_path
+    else
+      # TODO: Add flash error here
+      redirect_to dashboard_path
+    end
+  end
+
+  def show
+    @account = @user.accounts.find(params[:id])
   end
 
   private
+
+  def account_params
+    params.require(:account).permit(
+      :account_id
+    )
+  end
 
   def set_user
     @user = current_user
@@ -44,7 +62,5 @@ class ExternalAccountsController < ApplicationController
     Rails.cache.fetch("/users/#{@user.id}/external_accounts") do
       { access_token: access_token, accounts: accounts }
     end
-
-    cache = Rails.cache.fetch("/users/#{@user.id}/external_accounts")
   end
 end
