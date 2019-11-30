@@ -57,9 +57,9 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
-  gem 'factory_bot'
   # Brakeman: security analysis: https://github.com/presidentbeef/brakeman
   gem 'brakeman'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -75,6 +75,10 @@ group :test do
   gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'database_cleaner', '~> 1.5'
   gem 'faker'
+  # More assertions
+  gem 'rails-controller-testing'
+  # Mock live http requests
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

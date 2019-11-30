@@ -2,7 +2,7 @@
   <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
 </div>
 
-<ul id="slide-out" class="sidenav sidenav-fixed">
+<ul id="slide-out" class="sidenav sidenav-fixed teal lighten-2">
   <li><div class="user-view">
     <div class="background">
       <%= image_tag('sidenav-piggy.jpg') %>
@@ -17,6 +17,4 @@
   <li><a class="waves-effect" href="#!">Settings</a></li>
   <li><a class="waves-effect" href="#!">Help</a></li>
   <li><%= link_to 'Logout', destroy_user_session_path, class: "waves-effect waves-light btn", method: "delete" %></li>
-
 </ul>
-
