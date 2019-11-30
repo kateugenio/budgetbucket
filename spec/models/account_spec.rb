@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#validations' do
+    it { is_expected.to validate_presence_of(:account_id) }
+    it { is_expected.to validate_presence_of(:access_token) }
+    it { is_expected.to validate_presence_of(:account_name) }
+    it { is_expected.to validate_presence_of(:account_type) }
+  end
 end
