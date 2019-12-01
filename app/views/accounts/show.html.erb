@@ -1,1 +1,128 @@
-<h1><%= @account.account_name %></h1>
+<div class="row">
+  <div class="col-lg-3">
+    <h1><%= @account.account_name %></h1>
+    <button class="btn btn-primary" type="button">Get Latest Balance</button>
+    <p>Current Account Balance: $1200.00</p>
+    <p>To budget with: $200.00</p>
+  </div>
+
+  <div class="col-lg-9 mt-5">
+    <div class="text-right">
+      <button type="button" class="btn btn-outline-default mb-3">Add a bucket</button>
+    </div>
+
+    <div class="card card-stats mb-4 mb-lg-0 mt-3">
+      <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Mortgage</h5>
+                  <span class="h2 font-weight-bold mb-0">Balance: $200.00</span>
+              </div>
+              <div class="col-4">
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter amount">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2">Next due date: 12/12/2019</span>
+              <span class="text-nowrap">Since last month</span>
+          </p>
+      </div>
+    </div>
+
+    <div class="card card-stats mb-4 mb-lg-0 mt-3">
+      <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Car</h5>
+                  <span class="h2 font-weight-bold mb-0">Balance: $200.00</span>
+              </div>
+              <div class="col-4">
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter amount">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2">Next due date: 12/19/2019</span>
+              <span class="text-nowrap">Since last month</span>
+          </p>
+      </div>
+    </div>
+
+    <div class="card card-stats mb-4 mb-lg-0 mt-3">
+      <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Internet</h5>
+                  <span class="h2 font-weight-bold mb-0">Balance: $150.00</span>
+              </div>
+              <div class="col-4">
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter amount">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2">Next due date: 12/30/2019</span>
+              <span class="text-nowrap">Since last month</span>
+          </p>
+      </div>
+    </div>
+
+    <div class="card card-stats mb-4 mb-lg-0 mt-3">
+      <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Spending</h5>
+                  <span class="h2 font-weight-bold mb-0">Balance: $450.00</span>
+              </div>
+              <div class="col-4">
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter amount">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2">Next due date: N/A</span>
+              <span class="text-nowrap">Since last month</span>
+          </p>
+      </div>
+    </div>
+
+    <div id="bucket-totals" class="text-right mt-3">
+      <button type="button" class="btn btn-primary">
+        <span>Total</span>
+        <span class="badge badge-white">$1000.00</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
