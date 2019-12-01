@@ -11,7 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-//= require materialize
+//= require popper
+//= require bootstrap-sprockets
+//= require assets/js/argon-dashboard
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
@@ -21,11 +23,6 @@
 var applicationHandler = (function() {
 
   var initialize = function() {
-    initMaterializeSidenav();
-  };
-
-  var initMaterializeSidenav = function() {
-    $('.sidenav').sidenav();
   };
 
   return {
