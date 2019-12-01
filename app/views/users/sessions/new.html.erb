@@ -1,42 +1,90 @@
-<div class="devise-page-bg">
-  <div class="row">
-    <div class="col s1">
-    </div>
-
-    <div class="col s5 devise-form">
-      <h2>Log in</h2>
-
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="input-field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
-
-        <div class="input-field">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "current-password" %>
-        </div>
-
-        <% if devise_mapping.rememberable? %>
-          <div class="field">
-            <p>
-              <label>
-                <%= f.check_box :remember_me %>
-                <span>Remember Me</span>
-              </label>
-            </p>
+<div class="bg-default">
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header bg-gradient-primary py-7 py-lg-8">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6">
+              <h1 class="text-white">Welcome!</h1>
+              <p class="text-lead text-light"><%# TODO: Add custom message here %></p>
+            </div>
           </div>
-        <% end %>
-
-        <div class="actions">
-          <%= f.submit "Log in", class: "btn waves-effect waves-light" %>
         </div>
-      <% end %>
-
-      <%= render "users/shared/links" %>
+      </div>
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
     </div>
+    <!-- Page content -->
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="container mt--8 pb-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-7">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-header bg-transparent pb-5">
+                <div class="text-muted text-center mt-2 mb-3"><small>Sign in</small></div>
+              </div>
+              <div class="card-body px-lg-5 py-lg-5">
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <%= f.label :email, class: 'd-none' %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email', class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <%= f.label :password, class: 'd-none' %>
+                    <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Password', class: 'form-control' %>
+                  </div>
+                </div>
+                <% if devise_mapping.rememberable? %>
+                  <div class="custom-control custom-control-alternative custom-checkbox">
+                    <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                    <label class="custom-control-label" for=" customCheckLogin">
+                      <span class="text-muted">Remember me</span>
+                    </label>
+                  </div>
+                <% end %>
+                <div class="text-center">
+                  <%= f.submit "Sign in", class: 'btn btn-primary my-4' %>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-6">
+                <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                  <%= link_to new_password_path(resource_name), class: 'text-light' do %>
+                    <small>Fort your password?</small>
+                  <% end %>
+                <% end %>
+              </div>
 
-    <div class="col s6">
-    </div>
+              <div class="col-6 text-right">
+                <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+                  <%= link_to new_registration_path(resource_name), class: 'text-light' do %>
+                    <small>Create new account</small>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <footer class="py-5">
+      <div class="container">
+      </div>
+    </footer>
   </div>
 </div>
+

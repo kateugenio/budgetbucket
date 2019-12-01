@@ -1,41 +1,86 @@
-<div class="devise-page-bg">
-  <div class="row">
-    <div class="col s1">
+<div class="bg-default">
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header bg-gradient-primary py-7 py-lg-8">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6">
+              <h1 class="text-white">Welcome!</h1>
+              <p class="text-lead text-light">You're moments away from becoming a budget master.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
     </div>
-
-    <div class="col s5 devise-form">
-      <h2>Sign up</h2>
-
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <!-- Page content -->
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="container mt--8 pb-5">
         <%= render "devise/shared/error_messages", resource: resource %>
+        <!-- Table -->
+        <div class="row justify-content-center">
+          <div class="col-lg-6 col-md-8">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-body px-lg-5 py-lg-5">
+                <div class="form-group">
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <%= f.label :email, class: 'd-none' %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email'%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <%= f.label :password, class: 'd-none' %>
+                    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: 'Password' %><br>
+                  </div>
+                  <% if @minimum_password_length %>
+                    <small class='form-text text-muted'>(<%= @minimum_password_length %> characters minimum)</small>
+                  <% end %>
+                </div>
 
-        <div class="input-field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <%= f.label :password_confirmation, class: 'd-none' %>
+                    <%= f.password_field :password_confirmation, autocomplete: "password_confirmation", class: 'form-control', placeholder: 'Password Confirmation' %>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="button" class="btn btn-primary mt-4">Create account</button>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-6"></div>
+
+              <div class="col-6 text-right">
+                <%= link_to new_session_path(resource_name), class: 'text-light' do %>
+                  <small>Sign in</small>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="input-field">
-          <%= f.label :password %>
-          <%= f.password_field :password, autocomplete: "new-password" %>
-          <% if @minimum_password_length %>
-            <p>(<%= @minimum_password_length %> characters minimum)</p>
-          <% end %>
-        </div>
-
-        <div class="input-field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Sign up", class: "btn waves-effect waves-light" %>
-        </div>
-      <% end %>
-
-      <%= render "users/shared/links" %>
-    </div>
-
-    <div class="col s6">
-    </div>
+      </div>
+    <% end %>
   </div>
+  <!-- Footer -->
+  <footer class="py-5">
+    <div class="container">
+    </div>
+  </footer>
 </div>
