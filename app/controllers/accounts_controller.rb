@@ -3,6 +3,8 @@ class AccountsController < ApplicationController
 
   # POST /metadata
   def metadata
+    Rails.cache.delete("/users/#{@user.id}/external_accounts")
+
     respond_to do |format|
       @account = @user.accounts.new
       public_token = params[:public_token]
@@ -18,7 +20,7 @@ class AccountsController < ApplicationController
         }
       end
 
-      fetch_plaid_access_token_and_cache_token_and_accounts(public_token, @accounts)
+      fetch_plaid_access_token_and_cache_token_and_accounts(public_token, @institution_name, @accounts)
 
       format.js
     end
@@ -28,7 +30,6 @@ class AccountsController < ApplicationController
     @account = @user.accounts.new(account_params)
     @account.update_with_cached_metadata
     if @account.save
-      Rails.cache.delete("/users/#{@user.id}/external_accounts")
       redirect_to dashboard_path
     else
       # TODO: Add flash error here
@@ -52,15 +53,15 @@ class AccountsController < ApplicationController
     @user = current_user
   end
 
-  def fetch_plaid_access_token_and_cache_token_and_accounts(public_token, accounts)
+  def fetch_plaid_access_token_and_cache_token_and_accounts(public_token, institution_name, accounts)
     plaid_service = PlaidService.new
     response = plaid_service.token_exchange(public_token)
-    cache_metadata(response[:access_token], response[:item_id], accounts)
+    cache_metadata(response[:access_token], response[:item_id], institution_name, accounts)
   end
 
-  def cache_metadata(access_token, item_id, accounts)
+  def cache_metadata(access_token, item_id, institution_name, accounts)
     Rails.cache.fetch("/users/#{@user.id}/external_accounts") do
-      { access_token: access_token, accounts: accounts }
+      { access_token: access_token, institution_name: institution_name, accounts: accounts }
     end
   end
 end
