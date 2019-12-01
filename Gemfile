@@ -35,8 +35,11 @@ gem 'nokogiri'
 # jQuery
 gem 'jquery-rails'
 
-# materialize css
-gem 'materialize-sass', '~> 1.0.0'
+# Bootstrap
+gem 'bootstrap', '~> 4.3.1'
+# Bootstrap dependencies
+gem 'popper_js', '~> 1.14.3'
+gem 'sprockets-rails'
 
 # Ruby Static Code Analyser
 gem 'rubocop'

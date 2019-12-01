@@ -6,6 +6,7 @@ FactoryBot.define do
     account_name { 'Michael Scott Checking' }
     account_type { 'checking' }
     mask { 444 }
+    institution_name { 'Chase Bank' }
     user { User.first || create(:user) }
   end
 end

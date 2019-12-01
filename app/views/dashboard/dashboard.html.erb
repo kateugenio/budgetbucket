@@ -1,31 +1,190 @@
-<div class="row valign-wrapper">
-  <div class="col s9">
-    <h1 class="teal-text lighten-3">My Accounts</h1>
-  </div>
-  <div class="col s3">
-    <a class="waves-effect waves-light btn" id="connect-external-bank"><i class="material-icons left">cloud</i>Add Account</a>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col s12 m5">
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Linked Accounts</h4></li>
-      <% if @user.accounts.empty? %>
-        <li class="collection-item">You have no linked accounts. Click the Add Account button to link to your bank account.</li>
-      <% else %>
-        <% @user.accounts.each do |account| %>
-          <li class="collection-item">
-            <div><%= account.account_name %>
-              <%= link_to account_path(account), class: "secondary-content" do %>
-                <i class="material-icons">send</i>
-              <% end %>
+<!-- Navbar -->
+<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="../index.html">Dashboard</a>
+    <!-- Form -->
+    <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+      <div class="form-group mb-0">
+        <div class="input-group input-group-alternative">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          <input class="form-control" placeholder="Search" type="text">
+        </div>
+      </div>
+    </form>
+    <!-- User -->
+    <ul class="navbar-nav align-items-center d-none d-md-flex">
+      <li class="nav-item dropdown">
+        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="media align-items-center">
+            <div class="media-body ml-2 d-none d-lg-block">
+              <span class="mb-0 text-sm  font-weight-bold"><%= @user.email %></span>
             </div>
-          </li>
-        <% end %>
-      <% end %>
+          </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+          <div class=" dropdown-header noti-title">
+            <h6 class="text-overflow m-0">Welcome!</h6>
+          </div>
+          <div class="dropdown-divider"></div>
+          <%= link_to destroy_user_session_path, class: "dropdown-item", method: "delete" do %>
+            <i class="ni ni-user-run"></i>
+            <span>Logout</span>
+          <% end %>
+        </div>
+      </li>
     </ul>
   </div>
+</nav>
+<!-- End Navbar -->
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">All Accounts</h5>
+                  <span class="h2 font-weight-bold mb-0"><%= @user.accounts.count %></span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">On Budget</h5>
+                  <span class="h2 font-weight-bold mb-0">90%</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                    <i class="fas fa-chart-pie"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                <span class="text-nowrap">Since last week</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">On Time</h5>
+                  <span class="h2 font-weight-bold mb-0">100%</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                <span class="text-nowrap">Since yesterday</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Upcoming Bills</h5>
+                  <span class="h2 font-weight-bold mb-0">5</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <!-- Dark table -->
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">Accounts</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Account Name</th>
+                <th scope="col">Masked Account Number</th>
+                <th scope="col">Type</th>
+                <th scope="col">Bank</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @user.accounts.each do |account| %>
+                <tr>
+                  <td><%= account.account_name %></td>
+                  <td><%= account.mask %></td>
+                  <td><%= account.account_type.titleize %></td>
+                  <td><%= account.institution_name %></td>
+                  <td><%= link_to 'View', account_path(account) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; <%= Date.current.year %> <a href="#" class="font-weight-bold ml-1">BudgetBucket</a>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 </div>
 
-<div id="external-accounts-list-modal" class="modal"></div>
+<div class="modal fade" id="external-accounts-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>

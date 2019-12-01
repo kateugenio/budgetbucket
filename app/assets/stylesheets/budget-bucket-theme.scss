@@ -1,32 +1,7 @@
 body.budget-bucket-theme {
-  #menu-hamburger {
-    display: none;
-  }
-
-  .devise-page-bg {
-    background-image: image-url('piggy-bank.jpg');
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  .devise-form {
-    margin-top: 25%;
-  }
-
-  p {
-    &.radio-buttons-with-padding {
-      padding: 20px;
-      border: 1px solid #e0e0e0;
-    }
-  }
-
-  @media only screen and (max-width : 992px) {
+  /* Removes 15px left and right padding */
+  div.container-fluid {
     padding-left: 0;
-
-    #menu-hamburger {
-      display: block;
-    }
+    padding-right: 0;
   }
 }
