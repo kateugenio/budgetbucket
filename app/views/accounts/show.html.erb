@@ -1,12 +1,28 @@
-<div class="row">
-  <div class="col-lg-3">
-    <h1><%= @account.account_name %></h1>
-    <button class="btn btn-primary" type="button">Get Latest Balance</button>
-    <p>Current Account Balance: $1200.00</p>
-    <p>To budget with: $200.00</p>
+<div class="row my-3">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-3 mt-5">
+    <div class="card mt-5">
+      <div class="card-body">
+        <h5 class="card-title"><%= @account.account_name %></h5>
+        <p class="card-text"><%= @account.mask %></p>
+        <p class="card-text"><%= @account.account_type.titleize %></p>
+        <p class="card-text"><%= @account.institution_name %></p>
+
+        <%= link_to accounts_fetch_balance_path(@account), class: 'btn btn-primary', id: 'loading-spinnter-btn', remote: true do %>
+          <span class="spinner-grow spinner-grow-sm d-none" role="status" aria-hidden="true"></span>
+          <span id='loading-text'>Get Latest Balance</span>
+        <% end %>
+        <hr>
+        <p class='mt-3'>Available Balance: <span id='account-balance' class='badge badge-success'><%= @account.balance.nil? ? '--' : number_to_currency(@account.balance, precision: 2) %></span></p>
+        <small class='form-text text-muted'>As of:</small>
+        <small class='form-text text-muted momentize-format' id='balance-as-of-date' data-datetime='<%= @account.balance_as_of_date.to_i %>'></small>
+        <hr>
+        <p class='mt-3'>To Budget With: <span id='account-budget-amount' class='badge badge-success'></span></p>
+      </div>
+    </div>
   </div>
 
-  <div class="col-lg-9 mt-5">
+  <div class="col-lg-7 mt-4">
     <div class="text-right">
       <button type="button" class="btn btn-outline-default mb-3">Add a bucket</button>
     </div>
@@ -121,8 +137,9 @@
         <span class="badge badge-white">$1000.00</span>
       </button>
     </div>
-
   </div>
+
+  <div class="col-lg-1"></div>
 </div>
 
 
