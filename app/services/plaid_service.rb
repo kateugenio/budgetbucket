@@ -2,6 +2,7 @@ class PlaidService
   # https://github.com/plaid/plaid-ruby
   require 'plaid'
 
+  # rubocop: disable Metrics/AbcSize
   def initialize
     @client = Plaid::Client.new(
       env: Rails.application.credentials[Rails.env.to_sym][:plaid_env],
@@ -10,6 +11,7 @@ class PlaidService
       public_key: Rails.application.credentials[Rails.env.to_sym][:plaid_public_key]
     )
   end
+  # rubocop: enable Metrics/AbcSize
 
   # Exchange public_token for access_token
   # public_token expires in 30 minutes
@@ -20,10 +22,7 @@ class PlaidService
   end
 
   def account_balance(access_token, account_id)
-    response = @client.accounts.balance.get(access_token, { account_ids: [account_id] })
+    response = @client.accounts.balance.get(access_token, account_ids: [account_id])
     response[:accounts]
-  rescue StandardError => e
-    # TODO: Add some error logging
-    raise StandardError.new("Bad request")
   end
 end
