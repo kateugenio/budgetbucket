@@ -1,7 +1,8 @@
 class AccountsController < ApplicationController
   before_action :set_user
 
-  # POST /metadata
+  # POST /accounts/metadata
+  # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
   def metadata
     Rails.cache.delete("/users/#{@user.id}/external_accounts")
 
@@ -9,7 +10,9 @@ class AccountsController < ApplicationController
       @account = @user.accounts.new
       public_token = params[:public_token]
       @institution_name = params[:metadata][:institution][:name]
-      depository_accounts = params[:metadata][:accounts].select { |key, account| account[:type] == 'depository' }
+      depository_accounts = params[:metadata][:accounts].select { |_key, account|
+        account[:type] == 'depository'
+      }
       @accounts = []
       depository_accounts.each_pair do |_key, account|
         @accounts << {
@@ -20,12 +23,15 @@ class AccountsController < ApplicationController
         }
       end
 
-      fetch_plaid_access_token_and_cache_token_and_accounts(public_token, @institution_name, @accounts)
+      fetch_plaid_access_token_and_cache_token_and_accounts(public_token, @institution_name,
+                                                            @accounts)
 
       format.js
     end
   end
+  # rubocop: enable Metrics/AbcSize, Metrics/MethodLength
 
+  # POST /accounts/create_from_service
   def create_from_service
     @account = @user.accounts.new(account_params)
     @account.update_with_cached_metadata
@@ -33,7 +39,7 @@ class AccountsController < ApplicationController
       redirect_to dashboard_path
     else
       # TODO: Add flash error here
-      redirect_to dashboard_path
+      render 'dashboard/dashboard'
     end
   end
 
@@ -43,17 +49,17 @@ class AccountsController < ApplicationController
   end
 
   # GET /accounts/:id/balance
+  # rubocop: disable Metrics/AbcSize
   def fetch_balance_from_service
     @account = @user.accounts.find(params[:id])
     respond_to do |format|
       @response = PlaidService.new.account_balance(@account.access_token, @account.account_id)
-      balance = @response[0][:balances].available
+      balance = @response[0][:balances][:available]
       @account.update(balance: balance, balance_as_of_date: DateTime.current)
       format.js
     end
-  rescue
-    @response = nil
   end
+  # rubocop: enable Metrics/AbcSize
 
   private
 
@@ -67,7 +73,8 @@ class AccountsController < ApplicationController
     @user = current_user
   end
 
-  def fetch_plaid_access_token_and_cache_token_and_accounts(public_token, institution_name, accounts)
+  def fetch_plaid_access_token_and_cache_token_and_accounts(public_token, institution_name,
+                                                            accounts)
     plaid_service = PlaidService.new
     response = plaid_service.token_exchange(public_token)
     cache_metadata(response[:access_token], response[:item_id], institution_name, accounts)
