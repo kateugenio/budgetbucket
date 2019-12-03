@@ -37,8 +37,22 @@ class AccountsController < ApplicationController
     end
   end
 
+  # GET /accounts/:id
   def show
     @account = @user.accounts.find(params[:id])
+  end
+
+  # GET /accounts/:id/balance
+  def fetch_balance_from_service
+    @account = @user.accounts.find(params[:id])
+    respond_to do |format|
+      @response = PlaidService.new.account_balance(@account.access_token, @account.account_id)
+      balance = @response[0][:balances].available
+      @account.update(balance: balance, balance_as_of_date: DateTime.current)
+      format.js
+    end
+  rescue
+    @response = nil
   end
 
   private
