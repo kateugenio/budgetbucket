@@ -18,4 +18,12 @@ class PlaidService
     response = @client.item.public_token.exchange(public_token)
     { access_token: response['access_token'], item_id: response['item_id'] }
   end
+
+  def account_balance(access_token, account_id)
+    response = @client.accounts.balance.get(access_token, { account_ids: [account_id] })
+    response[:accounts]
+  rescue StandardError => e
+    # TODO: Add some error logging
+    raise StandardError.new("Bad request")
+  end
 end
