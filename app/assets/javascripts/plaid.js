@@ -38,7 +38,7 @@ var PlaidService = (function() {
         // $.post('/get_access_token', {
         //   public_token: public_token,
         // });
-        $.post('/metadata', {
+        $.post('/accounts/metadata', {
           public_token: public_token,
           metadata: metadata
         });
