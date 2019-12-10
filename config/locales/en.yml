@@ -31,3 +31,25 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        account:
+          attributes:
+            account_name:
+              blank: 'Account name cannot be blank'
+            account_type:
+              blank: 'Account tye cannot be blank'
+            institution_name:
+              blank: 'Institution name cannot be blank'
+        bucket:
+          attributes:
+            name:
+              blank: 'Bucket name cannot be blank'
+            bucket_type:
+              blank: 'Must select a valid bucket type'
+              inclusion: 'Must select a valid bucket type'
+            current_balance:
+              not_a_number: 'Current balance must be valid amount'
+            target_balance:
+              not_a_number: 'Target balance must be a valid amount'
