@@ -1,3 +1,6 @@
+<nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default px-3 pt-4" id="account-sticky-nav">
+  <h1>To Budget With: <span id='account-budget-amount' class='badge <%= success_or_danger_based_on_amount(@account) %>'><%= number_to_currency(@account.to_budget_with) %></span></h1>
+</nav>
 <div class="row my-3">
   <div class="col-lg-1"></div>
   <div class="col-lg-3 mt-5">
@@ -17,124 +20,56 @@
         <small class='form-text text-muted'>As of:</small>
         <small class='form-text text-muted momentize-format' id='balance-as-of-date' data-datetime='<%= @account.balance_as_of_date.to_i %>'></small>
         <hr>
-        <p class='mt-3'>To Budget With: <span id='account-budget-amount' class='badge badge-success'></span></p>
+        
       </div>
     </div>
   </div>
 
   <div class="col-lg-7 mt-4">
+    <div class="alert alert-danger d-none" role="alert">
+    </div>
+    <%= bootstrap_flash %>
+
     <div class="text-right">
-      <button type="button" class="btn btn-outline-default mb-3">Add a bucket</button>
+      <%= link_to 'Add a bucket', new_account_bucket_path(@account), class: 'btn btn-outline-default mb-3', remote: true %>
     </div>
 
-    <div class="card card-stats mb-4 mb-lg-0 mt-3">
-      <div class="card-body">
-          <div class="row">
-              <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Mortgage</h5>
-                  <span class="h2 font-weight-bold mb-0">Balance: $200.00</span>
+    <% @buckets.each do |bucket| %>
+      <div class="card card-stats mb-4 mb-lg-0 mt-3">
+        <div class="card-body">
+            <div class="row">
+              <div class="col-8">
+                  <h5 class="card-title text-uppercase text-muted mb-0"><%= bucket.name %></h5>
+                  <p class="h3">Target Balance: <span class="badge badge-success"><%= number_to_currency(bucket.target_balance, precision: 2) || 'n/a' %></span></p>
               </div>
               <div class="col-4">
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter amount">
+                <%= form_with model: bucket, url: account_bucket_balance_path(@account, bucket), method: :patch, id: 'bucket-balance-form', remote: true do |f| %>
+                  <div class="form-group">
+                    <%= f.label :current_balance, 'Balance', class: "font-weight-bold" %>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
                       </div>
+                      <%= f.text_field :current_balance, class: "form-control currency-input", placeholder: "Enter amount", value: number_to_currency(bucket.current_balance, unit: ""), bucket_id: bucket.id %>
                     </div>
                   </div>
-                </form>
+                <% end %>
               </div>
-          </div>
-          <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2">Next due date: 12/12/2019</span>
-              <span class="text-nowrap">Since last month</span>
-          </p>
+            </div>
+            <p class="mt-1 text-muted text-sm"><%= bucket.description %></p>
+            <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-default mr-2 badge badge-info"><%= bucket.bucket_type.titleize %></span>
+            </p>
+        </div>
       </div>
-    </div>
+    <% end %>
 
-    <div class="card card-stats mb-4 mb-lg-0 mt-3">
-      <div class="card-body">
-          <div class="row">
-              <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Car</h5>
-                  <span class="h2 font-weight-bold mb-0">Balance: $200.00</span>
-              </div>
-              <div class="col-4">
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter amount">
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-          </div>
-          <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2">Next due date: 12/19/2019</span>
-              <span class="text-nowrap">Since last month</span>
-          </p>
-      </div>
-    </div>
+    <%= hidden_field_tag :account_id, @account.id %>
 
-    <div class="card card-stats mb-4 mb-lg-0 mt-3">
-      <div class="card-body">
-          <div class="row">
-              <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Internet</h5>
-                  <span class="h2 font-weight-bold mb-0">Balance: $150.00</span>
-              </div>
-              <div class="col-4">
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter amount">
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-          </div>
-          <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2">Next due date: 12/30/2019</span>
-              <span class="text-nowrap">Since last month</span>
-          </p>
-      </div>
-    </div>
-
-    <div class="card card-stats mb-4 mb-lg-0 mt-3">
-      <div class="card-body">
-          <div class="row">
-              <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Spending</h5>
-                  <span class="h2 font-weight-bold mb-0">Balance: $450.00</span>
-              </div>
-              <div class="col-4">
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter amount">
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-          </div>
-          <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2">Next due date: N/A</span>
-              <span class="text-nowrap">Since last month</span>
-          </p>
-      </div>
-    </div>
-
-    <div id="bucket-totals" class="text-right mt-3">
+    <div class="text-right mt-3">
       <button type="button" class="btn btn-primary">
         <span>Total</span>
-        <span class="badge badge-white">$1000.00</span>
+        <span class="badge badge-white" id="bucket-totals"><%= number_to_currency(@account.sum_of_all_bucket_balances) %></span>
       </button>
     </div>
   </div>
@@ -142,4 +77,4 @@
   <div class="col-lg-1"></div>
 </div>
 
-
+<div class="modal fade" id="new-account-bucket-modal" tabindex="-1" role="dialog" aria-labelledby="new-account-bucket-modal" aria-hidden="true"></div>
