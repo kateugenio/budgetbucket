@@ -1,0 +1,17 @@
+$('.alert-danger').addClass('d-none');
+$('.alert-danger').empty();
+
+<% if @error %>
+  $('.alert-danger').removeClass('d-none');
+  $('.alert-danger').append('<%= @error %>');
+<% else %>
+  $('#account-budget-amount').html('<%= number_to_currency(@account.to_budget_with) %>');
+  $('#bucket-totals').html('<%= number_to_currency(@account.sum_of_all_bucket_balances) %>');
+
+  $('#account-budget-amount').removeClass();
+  <% if @account.to_budget_with >= 0 %>
+    $('#account-budget-amount').addClass('badge badge-secondary');
+  <% else %>
+    $('#account-budget-amount').addClass('badge badge-danger');
+  <% end %>
+<% end %>
