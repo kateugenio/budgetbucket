@@ -1,11 +1,11 @@
 module BootstrapFlashHelper
-  ALERT_TYPES = %i[default primary success info warning danger].freeze unless
+  ALERT_TYPES = [:default, :primary, :success, :info, :warning, :danger].freeze unless
     const_defined?(:ALERT_TYPES)
 
   # Used from Twitter Bootstrap Rails gem
   # https://github.com/seyhunak/twitter-bootstrap-rails/blob/master/app/helpers/bootstrap_flash_helper.rb
-  # rubocop: disable Rails/OutputSafety, Metrics/AbcSize
-  def bootstrap_flash(options = {})
+  # rubocop: disable Metrics/AbcSize
+  def bootstrap_flash(options={})
     flash_messages = []
     flash.each do |type, message|
       # Skip empty messages, e.g. for devise messages set to nothing in a locale file.
@@ -31,5 +31,5 @@ module BootstrapFlashHelper
     end
     flash_messages.join("\n").html_safe
   end
-  # rubocop: enable Rails/OutputSafety, Metrics/AbcSize
+  # rubocop: enable Metrics/AbcSize
 end

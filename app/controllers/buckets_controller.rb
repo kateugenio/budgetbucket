@@ -12,6 +12,7 @@ class BucketsController < ApplicationController
   end
 
   # POST /accounts/:account_id/buckets
+  # rubocop: disable Metrics/AbcSize
   def create
     @account = @user.accounts.find(params[:account_id])
     @bucket = @account.buckets.new(bucket_params)
@@ -25,8 +26,10 @@ class BucketsController < ApplicationController
       end
     end
   end
+  # rubocop: enable Metrics/AbcSize
 
   # PATCH /accounts/:account_id/buckets/:id
+  # rubocop: disable Metrics/AbcSize
   def update
     @account = @user.accounts.find(params[:account_id])
     @bucket = @account.buckets.find(params[:id])
@@ -38,15 +41,18 @@ class BucketsController < ApplicationController
       render 'accounts/show'
     end
   end
+  # rubocop: enable Metrics/AbcSize
 
   # PATCH /accounts/:account_id/buckets/:bucket_id/balance
+  # rubocop: disable Metrics/AbcSize
   def update_balance
     @account = @user.accounts.find(params[:account_id])
     @bucket = @account.buckets.find(params[:bucket_id])
-    unless @bucket.update(bucket_params)
-      @error = @bucket.errors.messages.values.flatten.uniq
-    end
+    return if @bucket.update(bucket_params)
+
+    @error = @bucket.errors.messages.values.flatten.uniq
   end
+  # rubocop: enable Metrics/AbcSize
 
   private
 

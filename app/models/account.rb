@@ -15,7 +15,7 @@ class Account < ApplicationRecord
   end
 
   def sum_of_all_bucket_balances
-    buckets&.map(&:current_balance).sum
+    buckets&.map(&:current_balance)&.sum
   end
 
   def to_budget_with
