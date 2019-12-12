@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   # DashboardController
   get 'dashboard', to: 'dashboard#dashboard'
 
-  # AccountsController
-  resources :accounts, only: :show
+  # AccountsController / BucketsController
+  resources :accounts, only: :show do
+    resources :buckets do
+      patch 'balance', to: 'buckets#update_balance'
+    end
+  end
   scope :accounts do
     post 'metadata', to: 'accounts#metadata'
     post 'create_from_service', to: 'accounts#create_from_service'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_002141) do
+ActiveRecord::Schema.define(version: 2019_12_10_051257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,21 @@ ActiveRecord::Schema.define(version: 2019_12_02_002141) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "institution_name"
-    t.decimal "balance"
+    t.decimal "balance", default: "0.0"
     t.datetime "balance_as_of_date"
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "buckets", force: :cascade do |t|
+    t.string "name"
+    t.decimal "current_balance"
+    t.decimal "target_balance"
+    t.string "bucket_type"
+    t.string "description"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_buckets_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,4 +56,5 @@ ActiveRecord::Schema.define(version: 2019_12_02_002141) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "buckets", "accounts"
 end

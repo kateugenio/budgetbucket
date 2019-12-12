@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
   belongs_to :user
+  has_many :buckets
 
   validates :access_token, :account_id,
             :account_name, :account_type,
@@ -11,5 +12,13 @@ class Account < ApplicationRecord
     assign_attributes(account_name: account[:name], mask: account[:mask],
                       account_type: account[:subtype], access_token: cached_metadata[:access_token],
                       institution_name: cached_metadata[:institution_name])
+  end
+
+  def sum_of_all_bucket_balances
+    buckets&.map(&:current_balance)&.sum
+  end
+
+  def to_budget_with
+    balance - sum_of_all_bucket_balances
   end
 end

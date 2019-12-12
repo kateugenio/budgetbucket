@@ -50,6 +50,9 @@ gem 'devise'
 # External Bank Account Connection
 gem 'plaid'
 
+# Table-view output in Rails console for db results
+gem 'hirb'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

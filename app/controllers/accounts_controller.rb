@@ -46,6 +46,7 @@ class AccountsController < ApplicationController
   # GET /accounts/:id
   def show
     @account = @user.accounts.find(params[:id])
+    @buckets = @account.buckets.order(:created_at)
   end
 
   # GET /accounts/:id/balance

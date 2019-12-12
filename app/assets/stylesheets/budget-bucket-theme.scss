@@ -4,4 +4,21 @@ body.budget-bucket-theme {
     padding-left: 0;
     padding-right: 0;
   }
+
+  .field_with_errors {
+    input, select {
+      border-color: #fb6340;
+    }
+  }
+
+  #account-sticky-nav {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    h1, p {
+      color: #f8f9fe;
+    }
+  }
 }
