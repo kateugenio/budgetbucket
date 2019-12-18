@@ -28,4 +28,9 @@ class Bucket < ApplicationRecord
 
     errors.add(:current_balance, "Current balance cannot be negative")
   end
+
+  def transfer_balance_before_destroy(bucket_to_be_destroyed)
+    balance_to_transfer = bucket_to_be_destroyed.current_balance
+    update(current_balance: self.current_balance += balance_to_transfer)
+  end
 end
