@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   resources :accounts, only: :show do
     resources :buckets do
       patch 'balance', to: 'buckets#update_balance'
+      get 'confirm_destroy', to: 'buckets#confirm_destroy', as: :confirm_destroy
     end
   end
+
   scope :accounts do
     post 'metadata', to: 'accounts#metadata'
     post 'create_from_service', to: 'accounts#create_from_service'
