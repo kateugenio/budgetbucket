@@ -1,14 +1,14 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">New Bucket</h5>
+      <h5 class="modal-title"><%= request == "new" ? "New" : "Edit" %> Bucket</h5>
       
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
 
-    <%= form_with model: @bucket, url: account_buckets_path(@account), remote: true do |f| %>
+    <%= form_with model: @bucket, url: request == "new" ? account_buckets_path(@account) : account_bucket_path(@account), remote: true do |f| %>
       <div class="modal-body">
         <%= bootstrap_flash %>
 
