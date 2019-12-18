@@ -43,6 +43,10 @@
                   <p class="h3">Target Balance: <span class="badge badge-success"><%= number_to_currency(bucket.target_balance, precision: 2) || 'n/a' %></span></p>
               </div>
               <div class="col-4">
+                <%= link_to account_bucket_confirm_destroy_path(@account, bucket), remote: true do %>
+                  <i class="ni ni-fat-remove float-right"></i><br>
+                <% end %>
+
                 <%= form_with model: bucket, url: account_bucket_balance_path(@account, bucket), method: :patch, id: 'bucket-balance-form', remote: true do |f| %>
                   <div class="form-group">
                     <%= f.label :current_balance, 'Balance', class: "font-weight-bold" %>
@@ -57,9 +61,10 @@
               </div>
             </div>
             <p class="mt-1 text-muted text-sm"><%= bucket.description %></p>
-            <p class="mt-3 mb-0 text-muted text-sm">
+            <p class="my-3 mb-0 text-muted text-sm">
                 <span class="text-default mr-2 badge badge-info"><%= bucket.bucket_type.titleize %></span>
             </p>
+            <%= link_to 'Edit bucket', edit_account_bucket_path(@account, bucket), remote: true %>
         </div>
       </div>
     <% end %>
@@ -77,4 +82,6 @@
   <div class="col-lg-1"></div>
 </div>
 
-<div class="modal fade" id="new-account-bucket-modal" tabindex="-1" role="dialog" aria-labelledby="new-account-bucket-modal" aria-hidden="true"></div>
+<div class="modal fade" id="account-bucket-modal" tabindex="-1" role="dialog" aria-labelledby="new-account-bucket-modal" aria-hidden="true"></div>
+<div class="modal fade" id="confirm-destroy-bucket-modal" tabindex="-1" role="dialog" aria-labelledby="confirm-destroy-bucket-modal" aria-hidden="true"></div>
+
