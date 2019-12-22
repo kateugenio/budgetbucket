@@ -1,0 +1,27 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Delete <%= @bucket.name %></h3>
+      
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <%= form_with model: @bucket, url: account_bucket_path(@account, @bucket), method: :delete do |f| %>
+      <div class="modal-body">
+        <% if @account.buckets.count == 1 || @bucket.current_balance == 0 %>
+          <p class="text-center">Are you sure?</p>
+        <% else %>
+          <p class="text-center">Choose a bucket to transfer the remaining current balance of <strong><%= number_to_currency(@bucket.current_balance) %></strong> to.</p>
+          <%= select_tag :bucket_id, options_for_select(remaining_buckets_for_balance_transfer(@account, @bucket).prepend("Choose a Bucket"), selected: "Choose a Bucket", disabled: "Choose a Bucket"), { class: 'form-control custom-select' } %>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">I changed my mind</button>
+        <%= f.submit 'Delete Bucket', class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

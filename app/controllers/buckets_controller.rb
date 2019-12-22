@@ -1,5 +1,6 @@
 class BucketsController < ApplicationController
   before_action :set_user
+  before_action :set_bucket, only: [:edit, :update, :destroy]
 
   # GET /accounts/:account_id/buckets/new
   def new
@@ -28,11 +29,11 @@ class BucketsController < ApplicationController
   end
   # rubocop: enable Metrics/AbcSize
 
+  def edit; end
+
   # PATCH /accounts/:account_id/buckets/:id
   # rubocop: disable Metrics/AbcSize
   def update
-    @account = @user.accounts.find(params[:account_id])
-    @bucket = @account.buckets.find(params[:id])
     if @bucket.update(bucket_params)
       redirect_to account_path(@account)
     else
@@ -54,6 +55,21 @@ class BucketsController < ApplicationController
   end
   # rubocop: enable Metrics/AbcSize
 
+  # GET /accounts/:account_id/buckets/:bucket_id/confirm_destroy
+  def confirm_destroy
+    @account = @user.accounts.find(params[:account_id])
+    @bucket = @account.buckets.find(params[:bucket_id])
+  end
+
+  def destroy
+    transfer_bucket = @account.buckets.find(params[:bucket_id])
+    transfer_bucket.transfer_balance_before_destroy(@bucket)
+
+    @bucket.destroy
+    flash[:success] = "Successfully destroyed bucket."
+    redirect_to account_path(@account)
+  end
+
   private
 
   def bucket_params
@@ -68,5 +84,10 @@ class BucketsController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  def set_bucket
+    @account = @user.accounts.find(params[:account_id])
+    @bucket = @account.buckets.find(params[:id])
   end
 end

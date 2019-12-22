@@ -21,4 +21,8 @@ class Account < ApplicationRecord
   def to_budget_with
     balance - sum_of_all_bucket_balances
   end
+
+  def budget_greater_than_or_equal_to_zero?
+    to_budget_with >= 0
+  end
 end

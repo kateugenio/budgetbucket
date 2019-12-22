@@ -1,2 +1,2 @@
-$('#new-account-bucket-modal').html('<%= j render partial: "new_account_bucket_modal" %>');
-$('#new-account-bucket-modal').modal('show');
+$('#account-bucket-modal').html('<%= j render partial: "new_account_bucket_modal", locals: { request: "new" } %>');
+$('#account-bucket-modal').modal('show');

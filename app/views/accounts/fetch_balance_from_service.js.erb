@@ -1,5 +1,12 @@
+$('#account-budget-amount').removeClass();
+
 <% if @response %>
   $('#account-balance').html('<%= number_to_currency(@account.balance) %>');
+  <% if @account.budget_greater_than_or_equal_to_zero? %>
+    $('#account-budget-amount').addClass('badge badge-secondary');
+  <% else %>
+    $('#account-budget-amount').addClass('badge badge-danger');
+  <% end %>
   $('#account-budget-amount').html('<%= number_to_currency(@account.to_budget_with) %>');
   $('#balance-as-of-date').attr('data-datetime', '<%= @account.balance_as_of_date.to_i %>');
   applicationHandler.humanizeDateTimeFields();
