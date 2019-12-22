@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   # POST /accounts/metadata
   # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
   def metadata
-    Rails.cache.delete("/users/#{@user.id}/external_accounts")
+    # Rails.cache.delete("/users/#{@user.id}/external_accounts")
 
     respond_to do |format|
       @account = @user.accounts.new
