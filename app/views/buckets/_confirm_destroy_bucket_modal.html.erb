@@ -14,7 +14,7 @@
           <p class="text-center">Are you sure?</p>
         <% else %>
           <p class="text-center">Choose a bucket to transfer the remaining current balance of <strong><%= number_to_currency(@bucket.current_balance) %></strong> to.</p>
-          <%= select_tag :bucket_id, options_for_select(remaining_buckets_for_balance_transfer(@account, @bucket).prepend("Choose a Bucket"), selected: "Choose a Bucket", disabled: "Choose a Bucket"), { class: 'form-control custom-select' } %>
+          <%= select_tag :transfer_bucket_id, options_for_select(remaining_buckets_for_balance_transfer(@account, @bucket).prepend("Choose a Bucket"), selected: "Choose a Bucket", disabled: "Choose a Bucket"), { class: 'form-control custom-select' } %>
         <% end %>
       </div>
 

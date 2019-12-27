@@ -5,6 +5,6 @@ FactoryBot.define do
     target_balance { 1000.00 }
     bucket_type { 'RECURRING_EXPENSE' }
     description { 'Due on the the 1st' }
-    account { create(:account) }
+    association :account
   end
 end
