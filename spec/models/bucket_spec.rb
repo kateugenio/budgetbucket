@@ -21,6 +21,17 @@ RSpec.describe Bucket, type: :model do
       # Assert
       expect(bucket).not_to be_valid
     end
+
+    it 'does not allow default spending bucket type to be updated' do
+      # Arrange
+      bucket.update(bucket_type: 'DEFAULT_SPENDING')
+
+      # Act
+      bucket.update(bucket_type: 'RECURRING_EXPENSE')
+
+      # Assert
+      expect(bucket).not_to be_valid
+    end
   end
 
   describe '#callbacks' do
@@ -38,6 +49,17 @@ RSpec.describe Bucket, type: :model do
 
       # Assert
       expect(new_bucket.current_balance).to eq 0
+    end
+
+    it 'does not allow default spending bucket to be destroyed' do
+      # Arrange
+      bucket.update(bucket_type: 'DEFAULT_SPENDING')
+
+      # Act
+      bucket.destroy
+
+      # Assert
+      expect(bucket.errors.messages[:bucket]).to include 'Cannot delete Default Spending Bucket'
     end
   end
 end

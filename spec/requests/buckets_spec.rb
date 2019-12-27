@@ -69,6 +69,27 @@ RSpec.describe 'Buckets', type: :request do
     expect(response).to render_template('edit')
   end
 
+  describe '#update' do
+    it 'updates' do
+      # Act
+      patch account_bucket_path(account, bucket,
+                                params: { bucket: { description: 'A new description' } })
+
+      # Assert
+      expect(response).to redirect_to(account_path(account))
+      expect(bucket.reload.description).to eq 'A new description'
+    end
+
+    it 'renders flash error if unsuccessful' do
+      # Act
+      patch account_bucket_path(account, bucket, params: { bucket: { bucket_type: '' } }), xhr: true
+
+      # Assert
+      expect(response).to render_template('edit')
+      expect(flash[:error]).to include 'Must select a valid bucket type'
+    end
+  end
+
   it 'renders confirm destroy modal' do
     # Act
     get account_bucket_confirm_destroy_path(account, bucket), xhr: true
@@ -106,21 +127,16 @@ RSpec.describe 'Buckets', type: :request do
                                                                    bucket_to_destroy_current_balance
     end
 
-    it 'resets account budget amount to account balance if the only bucket to destroy' do
+    it 'renders flash error if destroying a default spending bucket' do
       # Arrange
-      current_bucket_balance = bucket.current_balance
-      account_balance = account.balance
-
-      # Assume
-      expect(account.buckets.count).to eq 1
-      expect(account.to_budget_with).to eq account.balance - current_bucket_balance
+      bucket.update(bucket_type: 'DEFAULT_SPENDING')
 
       # Act
       delete account_bucket_path(account, bucket)
 
       # Assert
       expect(response).to redirect_to(account_path(account))
-      expect(account.reload.to_budget_with).to eq account_balance
+      expect(flash[:error]).to include 'Cannot delete Default Spending Bucket'
     end
   end
 end
