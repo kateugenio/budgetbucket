@@ -34,12 +34,13 @@ class BucketsController < ApplicationController
 
   # PATCH /accounts/:account_id/buckets/:id
   def update
-    if @bucket.update(bucket_params)
-      redirect_to account_path(@account)
-    else
-      @buckets = @account.buckets
-      flash.now[:error] = @bucket.errors.messages.values.flatten.uniq
-      render 'accounts/show'
+    respond_to do |format|
+      if @bucket.update(bucket_params)
+        format.html { redirect_to account_path(@account) }
+      else
+        flash.now[:error] = @bucket.errors.messages.values.flatten.uniq
+        format.js { render action: 'edit' }
+      end
     end
   end
 
@@ -67,8 +68,11 @@ class BucketsController < ApplicationController
       transfer_bucket.transfer_balance_before_destroy(@bucket)
     end
 
-    @bucket.destroy
-    flash[:success] = "Successfully destroyed bucket."
+    if @bucket.destroy
+      flash[:success] = "Successfully destroyed bucket."
+    else
+      flash[:error] = @bucket.errors.messages.values.flatten.uniq
+    end
     redirect_to account_path(@account)
   end
 
