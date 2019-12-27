@@ -8,7 +8,6 @@ class Account < ApplicationRecord
 
   after_commit :add_default_spending_bucket, on: :create
 
-
   #
   # Callback Methods
   #

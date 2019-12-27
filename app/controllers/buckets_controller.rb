@@ -33,6 +33,7 @@ class BucketsController < ApplicationController
   def edit; end
 
   # PATCH /accounts/:account_id/buckets/:id
+  # rubocop: disable Metrics/AbcSize
   def update
     respond_to do |format|
       if @bucket.update(bucket_params)
@@ -43,6 +44,7 @@ class BucketsController < ApplicationController
       end
     end
   end
+  # rubocop: enable Metrics/AbcSize
 
   # PATCH /accounts/:account_id/buckets/:bucket_id/balance
   # rubocop: disable Metrics/AbcSize
@@ -62,6 +64,7 @@ class BucketsController < ApplicationController
   end
 
   # DELETE /accounts/:account_id/buckets/:id
+  # rubocop: disable Metrics/AbcSize
   def destroy
     if params[:transfer_bucket_id]
       transfer_bucket = @account.buckets.find(params[:transfer_bucket_id])
@@ -75,6 +78,7 @@ class BucketsController < ApplicationController
     end
     redirect_to account_path(@account)
   end
+  # rubocop: enable Metrics/AbcSize
 
   private
 

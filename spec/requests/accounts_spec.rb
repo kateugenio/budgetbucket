@@ -40,7 +40,7 @@ RSpec.describe 'Accounts', type: :request do
       post create_from_service_path(params: { account: { account_id: cached_accounts[0][:id] } })
 
       # Assert
-      expect(response).to redirect_to(dashboard_path)
+      expect(response).to redirect_to(account_path(user.accounts.last))
       expect(user.accounts.count).to eq accounts_before + 1
     end
   end

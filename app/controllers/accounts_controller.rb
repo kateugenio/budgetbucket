@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   before_action :set_user
 
   # POST /accounts/metadata
-  # rubocop: disable Metrics/AbcSize
+  # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
   def metadata
     Rails.cache.delete("/users/#{@user.id}/external_accounts")
 
@@ -29,7 +29,7 @@ class AccountsController < ApplicationController
       format.js
     end
   end
-  # rubocop: enable Metrics/AbcSize
+  # rubocop: enable Metrics/AbcSize, Metrics/MethodLength
 
   # POST /accounts/create_from_service
   def create_from_service
