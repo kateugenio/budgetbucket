@@ -31,13 +31,13 @@ var applicationHandler = (function() {
   var displayGrowingSpinnerOnLoadingSpinnerBtn = function() {
     var loadingTextBefore = $('#loading-text').text();
     // `remote: true` set on link helper, so need to use bind to bind two ajax calls
-    $('#loading-spinnter-btn').bind('ajax:beforeSend', function() {
+    $('#loading-spinner-btn').bind('ajax:beforeSend', function() {
       $(this).attr('disabled', 'disabled');
       $('.spinner-grow').removeClass('d-none');
       $('#loading-text').html('Loading...')
     });
 
-    $('#loading-spinnter-btn').bind('ajax:complete', function() {
+    $('#loading-spinner-btn').bind('ajax:complete', function() {
       $(this).removeAttr('disabled');
       $('.spinner-grow').addClass('d-none');
       $('#loading-text').html(loadingTextBefore);

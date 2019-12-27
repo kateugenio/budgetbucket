@@ -11,7 +11,7 @@
         <p class="card-text"><%= @account.account_type.titleize %></p>
         <p class="card-text"><%= @account.institution_name %></p>
 
-        <%= link_to accounts_fetch_balance_path(@account), class: 'btn btn-primary', id: 'loading-spinnter-btn', remote: true do %>
+        <%= link_to accounts_fetch_balance_path(@account), class: 'btn btn-primary', id: 'loading-spinner-btn', remote: true do %>
           <span class="spinner-grow spinner-grow-sm d-none" role="status" aria-hidden="true"></span>
           <span id='loading-text'>Get Latest Balance</span>
         <% end %>
