@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   # POST /accounts/metadata
   # rubocop: disable Metrics/AbcSize
   def metadata
-    # Rails.cache.delete("/users/#{@user.id}/external_accounts")
+    Rails.cache.delete("/users/#{@user.id}/external_accounts")
 
     respond_to do |format|
       @account = @user.accounts.new
@@ -36,7 +36,7 @@ class AccountsController < ApplicationController
     @account = @user.accounts.new(account_params)
     @account.update_with_cached_metadata
     if @account.save
-      redirect_to dashboard_path
+      redirect_to account_path(@account)
     else
       # TODO: Add flash error here
       render 'dashboard/dashboard'
