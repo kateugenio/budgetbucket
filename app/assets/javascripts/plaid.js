@@ -21,7 +21,7 @@ var PlaidService = (function() {
       // codes to initialize Link; European countries will have GDPR
       // consent panel
       countryCodes: ['US'],
-      env: 'sandbox',
+      env: 'development',
       // Replace with your public_key from the Dashboard
       key: 'd26c1c4c1c41b04dd2540ef36d05b2',
       product: ['transactions'],
