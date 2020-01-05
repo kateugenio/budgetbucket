@@ -14,4 +14,9 @@ $('.alert-danger').empty();
   <% else %>
     $('#account-budget-amount').addClass('badge badge-danger');
   <% end %>
+
+  <% if @excess_budget_update %>
+    var $defaultSpendingBucketCurrentBalanceInput = $('input[bucket_id="<%= @account.default_spending_bucket.id %>"]');
+    $defaultSpendingBucketCurrentBalanceInput.val('<%= @account.default_spending_bucket.current_balance %>');
+  <% end %>
 <% end %>
