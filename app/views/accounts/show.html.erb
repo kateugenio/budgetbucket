@@ -1,5 +1,9 @@
 <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default px-3 pt-4" id="account-sticky-nav">
-  <h1>To Budget With: <span id='account-budget-amount' class='badge <%= success_or_danger_based_on_amount(@account) %>'><%= number_to_currency(@account.to_budget_with) %></span></h1>
+  <h1>To Budget With: <span id='account-budget-amount' class='badge <%= success_or_danger_based_on_amount(@account) %>'><%= number_to_currency(@account.to_budget_with) %></span>
+  </h1>
+  <% if @account.to_budget_with > 0 %>
+    <%= link_to 'Send to Default Spending', account_bucket_balance_path(@account, @account.default_spending_bucket, bucket: { current_balance: excess_budget_to_default_spending_amount(@account.to_budget_with, @account.default_spending_bucket) }, excess_budget_update: true), class: 'ml-4 btn btn-sm btn-outline-secondary', id: 'send-excess-budget-btn', method: :patch, remote: true %>
+  <% end %>
 </nav>
 <div class="row my-3">
   <div class="col-lg-1"></div>

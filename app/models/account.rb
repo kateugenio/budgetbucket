@@ -45,8 +45,12 @@ class Account < ApplicationRecord
   def budget_greater_than_or_equal_to_zero?
     to_budget_with >= 0
   end
-end
 
-#
-# End Instance Methods
-#
+  def default_spending_bucket
+    buckets.find_by(bucket_type: "DEFAULT_SPENDING")
+  end
+
+  #
+  # End Instance Methods
+  #
+end

@@ -90,6 +90,27 @@ RSpec.describe 'Buckets', type: :request do
     end
   end
 
+  describe '#update_balance' do
+    it 'updates default spending bucket with excess budget' do
+      # Arrange
+      default_spending_current_balance = 200
+      default_spending_bucket = create(:bucket, account: account,
+                                       current_balance: default_spending_current_balance,
+                                       bucket_type: 'DEFAULT_SPENDING')
+
+      account_budget = account.to_budget_with
+      total_amount = account_budget + default_spending_current_balance
+      params = { bucket: { current_balance: total_amount }, excess_budget_update: true }
+
+      # Act
+      patch account_bucket_balance_path(account, default_spending_bucket, params: params), xhr: true
+
+      # Assert
+      expect(response).to be_successful
+      expect(default_spending_bucket.reload.current_balance).to eq total_amount
+    end
+  end
+
   it 'renders confirm destroy modal' do
     # Act
     get account_bucket_confirm_destroy_path(account, bucket), xhr: true

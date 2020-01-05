@@ -51,6 +51,7 @@ class BucketsController < ApplicationController
   def update_balance
     @account = @user.accounts.find(params[:account_id])
     @bucket = @account.buckets.find(params[:bucket_id])
+    @excess_budget_update = params[:excess_budget_update]
     return if @bucket.update(bucket_params)
 
     @error = @bucket.errors.messages.values.flatten.uniq

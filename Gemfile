@@ -59,9 +59,6 @@ gem 'hirb'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
   gem 'rspec-rails'
   # Brakeman: security analysis: https://github.com/presidentbeef/brakeman
   gem 'brakeman'
@@ -81,6 +78,12 @@ group :test do
   gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'database_cleaner', '~> 1.5'
   gem 'faker'
+
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '~> 3.18.0'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+
   # More assertions
   gem 'rails-controller-testing'
   # Mock live http requests
