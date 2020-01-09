@@ -53,6 +53,9 @@ gem 'plaid'
 # Table-view output in Rails console for db results
 gem 'hirb'
 
+# Google Drive API
+gem 'google_drive'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
